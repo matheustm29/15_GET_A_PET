@@ -24,10 +24,10 @@ function Navbar() {
                 </li>
             {authenticated ? (
                 <>
-                <p>Logado</p>
                 <li>
-                    <button onClick={logout}>Sair</button>
+                    <Link to="/user/profile">Perfil</Link>
                 </li>
+                <li onClick={logout}>Sair</li>
                 </>
             ) : ( 
                 <>
