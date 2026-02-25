@@ -1,10 +1,13 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 /* components */
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import Container from './components/layout/Container';
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import Container from './components/layout/Container'
+import Message from './components/layout/Message'
 
+/* context */
+import {UserProvider} from './context/UserContext'
 
 /* pages */
 import Login from './components/pages/Auth/Login';
@@ -15,7 +18,9 @@ import Home from './components/pages/Home';
 function App() {
   return (
     <Router>
+      <UserProvider>
       <Navbar />
+      <Message />
       <Container>
         <Routes>
         <Route path="/login" element={<Login />} >
@@ -31,6 +36,7 @@ function App() {
       </Routes>
       </Container>
       <Footer />
+      </UserProvider>  
     </Router>
   );
 }
