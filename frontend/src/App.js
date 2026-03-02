@@ -16,6 +16,7 @@ import Home from './components/pages/Home'
 import Profile from './components/pages/User/Profile'
 import MyPets from './components/pages/Pet/MyPets'
 import AddPet from './components/pages/Pet/AddPet'
+import EditPet from './components/pages/Pet/EditPet'
 
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
         
         </Route>
         <Route path="/pet/add" element={<AddPet />} >
+        
+        </Route>
+        <Route path="/pet/edit/:id" element={<EditPet />} >
         
         </Route>
         <Route path="/" element={<Home />} >
