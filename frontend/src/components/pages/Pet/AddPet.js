@@ -3,10 +3,10 @@ import api from '../../../utils/api'
 import styles from './AddPet.module.css'
 
 import {useState} from 'react'
-import {Navigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 /* components */
-import PetForm from '../../form/AddPetForm'
+import PetForm from '../../form/PetForm'
 
 /* hooks */
 import useFlashMessage from '../../../hooks/useFlashMessage'
@@ -14,7 +14,7 @@ import useFlashMessage from '../../../hooks/useFlashMessage'
 function AddPet() {
     const [token] = useState(localStorage.getItem('token') || '')
     const {setFlashMessage} = useFlashMessage()
-    const navigate = Navigate()
+    const navigate = useNavigate()
 
     async function registerPet(pet) {
         let msgType = 'success'

@@ -2,7 +2,7 @@ import api from '../../../utils/api'
 
 import styles from './Dashboard.module.css'
 
-import {useState, useEffect, use} from 'react'
+import {useState, useEffect} from 'react'
 
 import { Link } from 'react-router-dom'
 
@@ -49,6 +49,30 @@ function MyPet() {
         setFlashMessage(data, msgType)
     }
 
+    async function concludeAdoption(id) {
+        let msgType = 'success'
+        
+        const data = await api.patch(`/pets/conclude/${id}`, {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`
+            }
+        }).then((response) => {
+            const updatedPets = pets.map((pet) => {
+                if(pet._id === id) {
+                    pet.available = false
+                }
+                return pet
+            })
+            setPets(updatedPets)
+            return response.data
+        }).catch((err) => {
+            msgType = 'error'
+            return err.response.data.message
+        })
+
+        setFlashMessage(data, msgType)
+    }
+
     return (
         <section >
             <div className={styles.petlist_header}> 
@@ -65,7 +89,9 @@ function MyPet() {
                                 {pet.available ?
                                  (<>
                                     {pet.adopter &&(
-                                        <button className={styles.conclude_btn}>Concluir Adoção</button>
+                                        <button className={styles.conclude_btn} onClick={() => concludeAdoption(pet._id)}>
+                                            Concluir Adoção
+                                        </button>
                                     )}
                                     <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
                                     <button onClick={() => removePet(pet._id)}>Excluir</button>
